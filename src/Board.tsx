@@ -18,12 +18,14 @@ export const Board: React.FC<BoardProps> = ({ boardName }) => {
             <h2 className="column__title">{item.columnTitle}</h2>
             <ul>
                 {item.columnTasks.map(task =>
-                    <li>
+                    <li className="card">
+                        <input type="radio" name="" id="" className="card__checkbox"/>
                         {task}
-                        <button>X</button>
+                        <button className="card__exit">X</button>
                     </li>
                 )}
             </ul>
+            <button className="column__btn-add">+ Добавить карточку</button>
         </li>
     )
     return (
