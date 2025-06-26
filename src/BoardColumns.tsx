@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import { ColumnsTasks } from "./ColumnsTasks";
 
 interface BoardItem {
@@ -23,10 +23,15 @@ interface BoardColumnsProps {
 
 export const BoardColumns = ({ item, addTaskToColumn, setBoardInfo }: BoardColumnsProps) => {
     const [addInputValue, setAddInputValue] = useState('');
+    const [addFlag, setAddFlag] = useState(false);
+    const handleBtnAdd = () => {
+        setAddFlag(true);
+    }
     const handleAddTask = () => {
         if (addInputValue.trim()) {
             addTaskToColumn(item.id, addInputValue);
             setAddInputValue('');
+            setAddFlag(false);
         }
     }
 
@@ -43,9 +48,13 @@ export const BoardColumns = ({ item, addTaskToColumn, setBoardInfo }: BoardColum
                 setBoardInfo={setBoardInfo}
             />
 
-            <button className="column__btn-add">+ Добавить карточку</button>
-            <div className="add-container">
+            <button 
+                className={"column__btn-add" + (addFlag ? " hide" : "")}
+                onClick={handleBtnAdd}
+            >+ Добавить карточку</button>
+            <div className={"add-container" + (addFlag ? " active" : "")}>
                 <input
+                    name="taskName"
                     type="text"
                     className="add-container__input"
                     value={addInputValue}

@@ -61,6 +61,33 @@
   cursor: pointer;
 }
 
+.add-container {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: .7s;
+  padding: 0;
+  border-radius: 10px;
+  display: flex;
+}
+
+.add-container.active {
+  opacity: 1;
+  height: initial;
+}
+
+.add-container__input {
+  padding: 5px 10px;
+  border-radius: 10px 0 0 10px;
+  border: none;
+  width: 60%;
+}
+
+.add-container__btn {
+  width: 40%;
+  cursor: pointer;
+}
+
 .column__btn-add {
   width: 100%;
   border: none;
@@ -73,6 +100,13 @@
   border-radius: 10px;
   cursor: pointer;
   transition: 0.7s;
+  overflow: hidden;
+}
+
+.column__btn-add.hide {
+  opacity: 0;
+  padding: 0;
+  height: 0;
 }
 
 .column__btn-add:hover {
