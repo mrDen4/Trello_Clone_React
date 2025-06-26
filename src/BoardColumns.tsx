@@ -7,12 +7,21 @@ interface BoardItem {
     columnTasks: string[];
 }
 
+interface BoardColumn {
+    id: number;
+    columnTitle: string;
+    columnTasks: string[];
+}
+
+type BoardState = BoardColumn[];
+
 interface BoardColumnsProps {
     item: BoardItem;
     addTaskToColumn: (columnId: number, newTask: string) => void;
+    setBoardInfo: React.Dispatch<React.SetStateAction<BoardState>>;
 }
 
-export const BoardColumns = ({ item, addTaskToColumn }: BoardColumnsProps) => {
+export const BoardColumns = ({ item, addTaskToColumn, setBoardInfo }: BoardColumnsProps) => {
     const [addInputValue, setAddInputValue] = useState('');
     const handleAddTask = () => {
         if (addInputValue.trim()) {
@@ -29,7 +38,9 @@ export const BoardColumns = ({ item, addTaskToColumn }: BoardColumnsProps) => {
             <h2 className="column__title">{item.columnTitle}</h2>
 
             <ColumnsTasks
+                columnId={item.id}
                 tasks={item.columnTasks}
+                setBoardInfo={setBoardInfo}
             />
 
             <button className="column__btn-add">+ Добавить карточку</button>
